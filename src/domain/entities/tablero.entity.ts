@@ -6,7 +6,7 @@ export interface TableroOptions {
 	descripcion: string;
 	activo?: boolean;
 	createdAt?: Date;
-	updatedAt?: Date ;
+	updatedAt?: Date | null;
 }
 
 export class TableroEntity {
@@ -15,7 +15,7 @@ export class TableroEntity {
 	public descripcion: string;
 	public activo?: boolean;
 	public createdAt?: Date;
-	public updatedAt?: Date ;
+	public updatedAt?: Date | null;
 
 	public tareas?: TareaEntity[];
 
@@ -27,5 +27,19 @@ export class TableroEntity {
 		this.activo = activo;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+	}
+	static fromObject(obj: Partial<TableroOptions>): TableroEntity {
+		if (!obj.id || !obj.nombre || !obj.descripcion) {
+			throw new Error('Missing required properties to create UsuarioEntity');
+		}
+
+		return new TableroEntity({
+			id: obj.id,
+			nombre: obj.nombre,
+			descripcion: obj.descripcion,
+			activo: obj.activo ?? true,
+			createdAt: obj.createdAt ?? new Date(),
+			updatedAt: obj.updatedAt ? new Date(obj.updatedAt) : null,
+		});
 	}
 }
