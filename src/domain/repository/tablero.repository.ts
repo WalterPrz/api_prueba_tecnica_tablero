@@ -6,4 +6,5 @@ export abstract class TableroRepository {
 	abstract findAll(): Promise<TableroEntity[]>;
 	abstract updateById(dto: UpdateTableroDto): Promise<TableroEntity>;
 	abstract deleteById(id: number): Promise<TableroEntity>;
+	abstract findById(id: number): Promise<TableroEntity | null>;
 }
