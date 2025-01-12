@@ -8,7 +8,6 @@ export class CreateTableroDto {
 	private constructor(public readonly nombre: string, public readonly descripcion: string) {}
 	static create(props: CreateTableroDtoProps) {
 		const {nombre, descripcion} = props;
-        console.log("nombre", nombre == null)
 		if (nombre == null) {
 			throw CustomError.UnprocessableEntity('Nombre es obligatorio');
 		}

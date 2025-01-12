@@ -15,8 +15,6 @@ export class UpdateTableroDto {
 		if (nombre != null && nombre.trim() === '') {
 			throw CustomError.UnprocessableEntity('Nombre no puede estar vacío');
 		}
-
-		// Validación para `descripcion` si está presente
 		if (descripcion != null && descripcion.trim() === '') {
 			throw CustomError.UnprocessableEntity('Descripción no puede estar vacía');
 		}
