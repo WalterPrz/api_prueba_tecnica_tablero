@@ -3,16 +3,16 @@ import {CustomError} from '../../errors/CustomError';
 import {TableroRepository} from '../../repository';
 
 export interface DeleteTableroUseCase {
-	execute(id: number): Promise<TableroEntity>;
+	execute(id: number): Promise<{message: string}>;
 }
 
 export class DeleteTablero implements DeleteTableroUseCase {
 	constructor(private readonly repository: TableroRepository) {}
-	async execute(id: number): Promise<TableroEntity> {
+	async execute(id: number): Promise<{message: string}> {
 		const tablero = await this.repository.findById(id);
 		if (!tablero) {
 			throw CustomError.NotFound('No se encontró registro');
 		}
-		return this.repository.deleteById(id);
+		return {message: 'Se eliminó con éxito'};
 	}
 }
