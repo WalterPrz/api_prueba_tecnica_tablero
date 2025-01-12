@@ -12,3 +12,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Usuario {
+  id           Int       @id @default(autoincrement())
+  correo       String    @unique
+  clave        String
+  activo       Boolean   @default(true)
+  ultimo_login DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Estado {
+  id     Int     @id @default(autoincrement())
+  nombre String
+  tareas Tarea[]
+}
+
+model Tablero {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  tareas      Tarea[]
+}
+
+model Tarea {
+  id          Int      @id @default(autoincrement())
+  titulo      String
+  descripcion String
+  tablero_id  Int
+  estado_id   Int
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  tablero     Tablero  @relation(fields: [tablero_id], references: [id])
+  Estado      Estado   @relation(fields: [estado_id], references: [id])
+}
