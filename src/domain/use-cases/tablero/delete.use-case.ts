@@ -13,6 +13,7 @@ export class DeleteTablero implements DeleteTableroUseCase {
 		if (!tablero) {
 			throw CustomError.NotFound('No se encontró registro');
 		}
+		await this.repository.deleteById(id);
 		return {message: 'Se eliminó con éxito'};
 	}
 }
