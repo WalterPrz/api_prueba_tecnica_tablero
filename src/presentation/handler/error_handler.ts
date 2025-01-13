@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import {CustomError} from '../../domain/errors/CustomError';
 
-export default (err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
+export const handlerError = (err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
 	if (err instanceof CustomError) {
 		res.status(err.statusCode).json({message: err.message});
 	} else {
