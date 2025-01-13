@@ -35,4 +35,19 @@ export class TareaEntity {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
+	static fromObject(obj: Partial<TareaOptions>): TareaEntity {
+		if (!obj.id || !obj.titulo || !obj.descripcion || !obj.tablero_id || !obj.estado_id) {
+			throw new Error('Missing required properties to create UsuarioEntity');
+		}
+		return new TareaEntity({
+			id: obj.id,
+			titulo: obj.titulo,
+			descripcion: obj.descripcion,
+			tablero_id: obj.tablero_id,
+			estado_id: obj.estado_id,
+			activo: obj.activo ?? true,
+			createdAt: obj.createdAt ?? new Date(),
+			updatedAt: obj.updatedAt ? new Date(obj.updatedAt) : null,
+		});
+	}
 }

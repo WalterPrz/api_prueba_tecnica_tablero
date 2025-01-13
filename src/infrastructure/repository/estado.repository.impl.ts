@@ -8,6 +8,6 @@ export class EstadoRepositoryImpl implements EstadoRepository {
 		return this.datasource.findAll();
 	}
 	findById(id: number): Promise<EstadoEntity | null> {
-		throw this.datasource.findById(id);
+		return this.datasource.findById(id);
 	}
 }
