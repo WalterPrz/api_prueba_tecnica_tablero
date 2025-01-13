@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: API de Login
+  description: Endpoint para autenticación de usuarios
+  version: 1.0.0
+paths:
+  /v1/auth/login:
+    post:
+      summary: Autenticación de usuario
+      description: Permite a un usuario autenticarse enviando su correo y clave.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                correo:
+                  type: string
+                  format: email
+                  description: Correo electrónico del usuario
+                clave:
+                  type: string
+                  format: password
+                  description: Clave del usuario
+              required:
+                - correo
+                - clave
+      responses:
+        '200':
+          description: Autenticación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Login exitoso"
+                  token:
+                    type: string
+                    description: "Token JWT para acceder a los recursos protegidos"
+        '422':
+          description: Solicitud incorrecta, falta de datos o parámetros incorrectos
+        '401':
+          description: Credenciales inválidas o no autorizadas
+        '500':
+          description: Error interno del servidor

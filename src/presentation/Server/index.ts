@@ -1,7 +1,8 @@
 import express, {Router, Express} from 'express';
-import * as http from "http";
+import * as http from 'http';
 import compression from 'compression';
 import {handlerError} from '../handler/error_handler';
+import {swaggerDocs} from '../../config';
 interface Options {
 	port: number;
 	api_routes: Router;
@@ -28,6 +29,8 @@ export class Server {
 		this.app.use(compression());
 
 		//* public folder
+
+		this.app.use('/api-docs', swaggerDocs.swaggerUi.serve, swaggerDocs.swaggerUi.setup(swaggerDocs.swaggerDocument));
 		this.app.use(express.static(this.publicPath));
 
 		//* Routes
