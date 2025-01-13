@@ -2,7 +2,7 @@ import {PrismaConection} from '../../data/postgres';
 import {EstadoDatasource} from '../../domain/datasources';
 import {EstadoEntity} from '../../domain/entities';
 
-export class EstadlDatasourceImpl implements EstadoDatasource {
+export class EstadoDatasourceImpl implements EstadoDatasource {
 	private readonly prisma;
 	constructor() {
 		this.prisma = PrismaConection.getInstace;
