@@ -1,5 +1,5 @@
 import express, {Router, Express} from 'express';
-
+import * as http from "http";
 import compression from 'compression';
 import {handlerError} from '../handler/error_handler';
 interface Options {
@@ -11,7 +11,7 @@ interface Options {
 export class Server {
 	public readonly app: Express;
 	private readonly port: number;
-	private serverListener?: any;
+	private serverListener?: http.Server;
 	private readonly apiRoutes: Router;
 	private readonly publicPath: string;
 	constructor(options: Options) {
