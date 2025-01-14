@@ -9,3 +9,4 @@ export * from './tarea/create.use-case';
 export * from './tarea/delete.use-case';
 export * from './tarea/findall.use-case';
 export * from './tarea/update.use-case';
+export * from './reporte/get.use-case';

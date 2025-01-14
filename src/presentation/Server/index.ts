@@ -1,7 +1,10 @@
 import express, {Router, Express} from 'express';
-import * as http from "http";
+import * as http from 'http';
 import compression from 'compression';
 import {handlerError} from '../handler/error_handler';
+import {swaggerDocs} from '../../config';
+import cors from 'cors';
+import corsConfig from '../../config/cors';
 interface Options {
 	port: number;
 	api_routes: Router;
@@ -23,11 +26,14 @@ export class Server {
 	}
 	async start() {
 		//* middleware
+		this.app.use(cors(corsConfig));
 		this.app.use(express.json({limit: '5mb'}));
 		this.app.use(express.urlencoded({limit: '5mb', extended: true, parameterLimit: 50000}));
 		this.app.use(compression());
 
 		//* public folder
+
+		this.app.use('/api-docs', swaggerDocs.swaggerUi.serve, swaggerDocs.swaggerUi.setup(swaggerDocs.swaggerDocument));
 		this.app.use(express.static(this.publicPath));
 
 		//* Routes
