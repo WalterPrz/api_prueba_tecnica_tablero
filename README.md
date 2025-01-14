@@ -83,3 +83,11 @@ graph TD
   style F fill:#fcf,stroke:#333,stroke-width:2px
   style G fill:#f9f,stroke:#333,stroke-width:2px
 ```
+
+## Author
+
+**Walter Pérez**  
+[My GitHub Profile](https://github.com/WalterPrz)  
+Full Stack Developer
+
+---
